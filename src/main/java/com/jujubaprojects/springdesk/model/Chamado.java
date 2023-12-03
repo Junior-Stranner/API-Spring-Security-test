@@ -2,7 +2,6 @@ package com.jujubaprojects.springdesk.model;
 
 import java.time.LocalDate;
 
-import org.hibernate.annotations.ManyToAny;
 
 import com.jujubaprojects.springdesk.enums.Prioridade;
 import com.jujubaprojects.springdesk.enums.Status;
