@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Cadastro de Cliente</title>
+    <!-- Inclua aqui o conteúdo do fragmento "head", se necessário -->
+    <th:replace="fragments/head"></th:replace>
+</head>
+
+<body>
+    <h1>Cadastro de Cliente</h1>
+    
+    <form th:object="${cliente}" th:action="@{/cadastro}" method="post">
+        <!-- Campos de formulário para o cadastro de cliente -->
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" th:field="*{nome}" />
+
+        <label for="email">E-mail:</label>
+        <input type="text" id="email" name="email" th:field="*{email}" />
+
+        <label for="perfil">Perfil:</label>
+        <select id="perfil" name="perfil" th:field="*{perfil}">
+            <option th:each="perfil : ${perfils}" th:value="${perfil}" th:text="${perfil}"></option>
+        </select>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+
+</html>
