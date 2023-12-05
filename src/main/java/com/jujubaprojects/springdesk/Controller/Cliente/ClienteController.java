@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +50,38 @@ public class ClienteController {
             System.out.println("Erro ao salvar " + e.getMessage());
             return mv;
        }
+
+    }
+
+    @GetMapping("/list-clientes")
+    public ModelAndView clienteList(){
+        ModelAndView mv = new ModelAndView("/cliente/list-cliente");
+        mv.addObject("clientes", this.clienteRepository.findAll());
+        return mv;
+
+    }
+
+    @GetMapping("/exluir-cliente/{id}")
+    public String excluir(@PathVariable("id") int id){
+        this.clienteRepository.deleteById(id);
+        return "/home/index";
+
+    }
+
+    @GetMapping("/editar/{id}")
+    public ModelAndView editarCliente(@PathVariable("id") int id){
+        ModelAndView mv = new ModelAndView("/cliente/editar");
+        mv.addObject("perfils", Perfil.values());
+        mv.addObject("usuario", this.clienteRepository.findById(id));
+        return mv;
+
+    }
+
+    @PostMapping("/editar-cliente")
+    public ModelAndView editar(Cliente cliente ){
+        ModelAndView mv = new ModelAndView("/cliente/editar");
+        this.clienteRepository.save(cliente);
+        return clienteList();
 
     }
 
