@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,6 +62,24 @@ public class TecnicoController {
         ModelAndView mv = new ModelAndView("/tecnico/tecnico-list");
         mv.addObject("tecnicos", this.tecnicoRepository.findAll());
         return mv;
+
+    }
+
+
+       @GetMapping("/editar/{id}")
+    public ModelAndView editarCliente(@PathVariable("id") int id){
+        ModelAndView mv = new ModelAndView("/tecnico/editar");
+        mv.addObject("perfils", Perfil.values());
+        mv.addObject("usuario", this.tecnicoRepository.findById(id));
+        return mv;
+
+    }
+
+    @PostMapping("/editar-tecnico")
+    public ModelAndView editar(Tecnico tecnico ){
+        ModelAndView mv = new ModelAndView("/tecnico/editar");
+        this.tecnicoRepository.save(tecnico);
+        return tecnicosList();
 
     }
 
