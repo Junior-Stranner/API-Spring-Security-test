@@ -36,7 +36,7 @@ public class ChamadosController {
         return mv;
     }
 
-   @PostMapping("/mew-ticket")
+   @PostMapping("/new-ticket")
    public ModelAndView newticket(Chamado chamado){
     ModelAndView mv = new ModelAndView("home");
     this.chamadoRepository.save(chamado);
