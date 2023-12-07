@@ -58,7 +58,7 @@
                 <div class="form-group col-3">
                   <label for="nome" class="lblCliente">Selecione o técnico responsável:</label>
                   <select class="form-control" th:field="*{tecnico}">
-                    <option th:each="tecs : ${tecnicos}" th:text="${tecs.nome}" th:value="${tecs.id}"></option>
+                    <option th:each="tecs : ${tecnicos}" th:text="${Tecnico.nome}" th:value="${Tecnico.id}"></option>
                   </select>
                 </div>
 

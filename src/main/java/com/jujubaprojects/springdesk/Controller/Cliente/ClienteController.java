@@ -55,7 +55,7 @@ public class ClienteController {
 
     @GetMapping("/list-clientes")
     public ModelAndView clienteList(){
-        ModelAndView mv = new ModelAndView("/cliente/list-cliente");
+        ModelAndView mv = new ModelAndView("cliente/list-cliente");
         mv.addObject("clientes", this.clienteRepository.findAll());
         return mv;
 
@@ -70,7 +70,7 @@ public class ClienteController {
 
     @GetMapping("/editar/{id}")
     public ModelAndView editarCliente(@PathVariable("id") int id){
-        ModelAndView mv = new ModelAndView("/cliente/editar");
+        ModelAndView mv = new ModelAndView("cliente/editar");
         mv.addObject("perfils", Perfil.values());
         mv.addObject("usuario", this.clienteRepository.findById(id));
         return mv;

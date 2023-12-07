@@ -13,7 +13,6 @@ import com.jujubaprojects.springdesk.Repository.TecnicoRepository;
 import com.jujubaprojects.springdesk.enums.Prioridade;
 import com.jujubaprojects.springdesk.model.Chamado;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -28,7 +27,7 @@ public class ChamadosController {
     
     @GetMapping("/criar")
     public ModelAndView ticket(){
-        ModelAndView mv = new ModelAndView("/chamados/ticket");
+        ModelAndView mv = new ModelAndView("chamados/ticket");
         mv.addObject("StatusChamado",Status.values());
         mv.addObject("Prioridade", Prioridade.values());
         mv.addObject("Tecnicos", this.tecnicoRepository.findAll());

@@ -1,6 +1,5 @@
 package com.jujubaprojects.springdesk.Controller.Tecnico;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.jujubaprojects.springdesk.Repository.TecnicoRepository;
 import com.jujubaprojects.springdesk.Util.UploadUtil;
 import com.jujubaprojects.springdesk.enums.Perfil;
-import com.jujubaprojects.springdesk.model.Cliente;
 import com.jujubaprojects.springdesk.model.Tecnico;
 
 @RestController
@@ -28,19 +26,18 @@ public class TecnicoController {
 
     
     @GetMapping("/cadastro")
-    public ModelAndView cadastrar(Cliente cliente){
+    public ModelAndView cadastro(Tecnico tecnico){
         ModelAndView mv = new ModelAndView("tecnico/cadastro");
-        mv.addObject("usuario", cliente);
-        mv.addObject("perfils", Perfil.values());
+        mv.addObject("tecnico", tecnico);
+        Perfil[] profiles = {Perfil.ADMIN, Perfil.TECNICO};
+        mv.addObject("perfils", profiles);
         return mv;
-
     }
-   @PostMapping("/cadastro-tecnico")
-    public ModelAndView cadastro(@ModelAttribute Tecnico tecnico , @RequestParam("file") MultipartFile imagem){
+    @PostMapping("/cadastro-tecnico")
+    public ModelAndView cadastro(@ModelAttribute Tecnico tecnico, @RequestParam("file") MultipartFile imagem){
        ModelAndView mv =  new ModelAndView("tecnico/cadastro");
-
-
-       mv.addObject("usuario", tecnico);
+     
+       mv.addObject("tecnico", tecnico);
 
        try {
         if(UploadUtil.fazerUploadImagem(imagem)){
@@ -54,7 +51,6 @@ public class TecnicoController {
             System.out.println("Erro ao salvar " + e.getMessage());
             return mv;
        }
-
     }
 
     @GetMapping("/list-tecnicos")
